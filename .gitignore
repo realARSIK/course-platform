@@ -1,1 +1,18 @@
+# Системные файлы
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Окружение
+.env*
+!.env.example
+
+# Зависимости
 node_modules
+
+# Docker
+docker-compose.override.yml
