@@ -1,0 +1,55 @@
+.nav__button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: transform 400ms;
+}
+
+.nav__button-line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: var(--color-white);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.nav__button-line--top {
+  stroke-dasharray: 40 160;
+}
+
+.nav__button-line--middle {
+  stroke-dasharray: 40 142;
+  transform-origin: 50%;
+  transition: transform 400ms;
+}
+
+.nav__button-line--bottom {
+  stroke-dasharray: 40 85;
+  transform-origin: 50%;
+  transition: transform 400ms, stroke-dashoffset 400ms;
+}
+
+.nav__button--active {
+  transform: rotate(45deg);
+}
+
+.nav__button--active .nav__button-line--top {
+  stroke-dashoffset: -64px;
+}
+
+.nav__button--active .nav__button-line--middle {
+  transform: rotate(90deg);
+}
+
+.nav__button--active .nav__button-line--bottom {
+  stroke-dashoffset: -64px;
+}
+
+@media (min-width: 767px) {
+  .nav__button {
+    display: none;
+  }
+}

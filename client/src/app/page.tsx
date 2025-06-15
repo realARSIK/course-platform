@@ -1,12 +1,9 @@
-import { Empty } from "antd";
-import styles from "./page.module.css";
+import Test from "@/components/Test/Test";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Empty/>
-      </main>
-    </div>
+    <>
+      <Test/>
+    </>
   );
 }
