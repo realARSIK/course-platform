@@ -1,0 +1,19 @@
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo__icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  fill: var(--color-logo);
+}
+
+.logo__text {
+  color: var(--color-white);
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 10px;
+}
