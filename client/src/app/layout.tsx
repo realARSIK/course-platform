@@ -1,22 +1,46 @@
 import type { Metadata } from "next";
-import 'antd/dist/reset.css';
+import { Inter } from 'next/font/google'
 import "./globals.css";
-import AppLayout from "@/components/AppLayout/AppLayout";
+import Header from "@/components/Layout/Header/Header";
+import Footer from "@/components/Layout/Footer/Footer";
+import { mockGlobalSettings } from "@/mocks";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+  weight: ['300','400','500','600','700'],
+  style: ["normal", "italic"]
+})
 
 export const metadata: Metadata = {
   title: "Coures Platform",
   description: "Online Coures Platform",
 };
 
-export default function RootLayout({
+export function loader() {
+  return mockGlobalSettings 
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const { header, footer } = loader()
+  const auth = true
+
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <body>
-        <AppLayout>{children}</AppLayout>
+        <div className="wrapper">
+          <Header data={header} isAuth={auth}/>
+          <main className="main">
+            {children}
+          </main>
+          <Footer data={footer}/>
+        </div>
       </body>
     </html>
   );
