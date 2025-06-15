@@ -1,0 +1,21 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+  background-color: var(--color-folly);
+  border-radius: var(--border-radius-full);
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.profile__icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.profile:hover {
+  color: var(--color-folly);
+  background-color: var(--color-white);
+}
