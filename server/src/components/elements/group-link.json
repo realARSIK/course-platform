@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_elements_group_links",
+  "info": {
+    "displayName": "Group Link"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "required": true,
+      "component": "elements.link"
+    }
+  }
+}
