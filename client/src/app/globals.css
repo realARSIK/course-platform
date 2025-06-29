@@ -15,6 +15,10 @@
   --color-gray-900: #1c1c1c;
   --color-gray-op-50: #e8e8e850;
 
+  --color-content-primary: #000000d9;
+  --color-content-secondary: #00000080;
+  --color-content-tertiary: #00000040;
+
   --color-rich-black: #011627ff;
   --color-deep-black: #02040fff;
   --color-folly: #ff3366ff;
@@ -31,17 +35,6 @@
   --color-seasalt-80: #f6f7f8cc;
   --color-periwinkle-80: #dcccffcc;
 
-  --color-gradient-top: linear-gradient(0deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-right: linear-gradient(90deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-bottom: linear-gradient(180deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-left: linear-gradient(270deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-top-right: linear-gradient(45deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-bottom-right: linear-gradient(135deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-top-left: linear-gradient(225deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-bottom-left: linear-gradient(315deg, #011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-  --color-gradient-radial: radial-gradient(#011627ff, #ff3366ff, #2ec4b6ff, #f6f7f8ff, #20a4f3ff);
-
-  --color-accent-red: #ff5b5c;
   --color-logo: var(--color-folly);
 
   --color-success: var(--color-jade);
@@ -62,9 +55,32 @@
   --bg-header: var(--color-rich-black-80);
   --bg-footer: var(--color-rich-black);
 
-  --border-radius-full: 1000px;
-
   --container-width: 1280px;
+
+  --spacing-2: 0.125rem;
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-20: 1.25rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-36: 2.25rem;
+  --spacing-40: 2.5rem;
+  --spacing-48: 3rem;
+  --spacing-64: 4rem;
+  --spacing-80: 5rem;
+
+  --border-radius-4: 0.25rem;
+  --border-radius-5: 0.3125rem;
+  --border-radius-6: 0.375rem;
+  --border-radius-8: 0.5rem;
+  --border-radius-10: 0.625rem;
+  --border-radius-12: 0.75rem;
+  --border-radius-14: 0.875rem;
+  --border-radius-16: 1rem;
+  --border-radius-20: 1.25rem;
+  --border-radius-full: 1000px;
 }
 
 *,
@@ -89,11 +105,11 @@ a {
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
 }
 
 .main {
   flex: 1;
+  min-height: 100dvh;
 }
 
 .container {

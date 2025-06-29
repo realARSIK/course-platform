@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 import { HeaderData } from "@/types/global";
 import "./Header.css";
 import Nav from "@/components/Nav/Nav";
@@ -13,7 +13,7 @@ interface HeaderProps {
   isAuth: boolean
 }
 
-const Header: FC<HeaderProps> = ({ data, isAuth }) => {
+const Header: FC<HeaderProps> = memo(({ data, isAuth }) => {
   const [ isOpen, setIsOpen ] = useState<boolean>(false)
   
   const toggleBurger = () => {    
@@ -25,12 +25,12 @@ const Header: FC<HeaderProps> = ({ data, isAuth }) => {
        <div className="header__inner">
         <Logo/>
         <NavBurger isOpen={isOpen} toggleBurger={toggleBurger}/>
-        <Nav links={data.links} isOpen={isOpen}/>
+        <Nav links={data.navigation} isOpen={isOpen}/>
         <NavButtons isAuth={isAuth}/>
       </div>
     </header>
   )
-}
+})
 
 export default Header
 

@@ -1,29 +1,34 @@
 export interface LinkItem {
-  name: string;
-  path: string;
+  text: string;
+  url: string;
 }
 
 export interface SocialLinkItem extends LinkItem {
-  slug: string;
+  iconName: string;
 }
 
-export interface LinkGroup {
+export interface LinkGroups {
   title: string;
   links: LinkItem[];
 }
 
 export interface HeaderData {
-  logo: string;
-  links: LinkItem[];
+  navigation: LinkItem[];
 }
 
 export interface FooterData {
-  main: LinkGroup[];
-  social: SocialLinkItem[];
+  linkGroups: LinkGroups[];
+  socialLinks: SocialLinkItem[];
   legalLinks: LinkItem[];
 }
 
 export interface GlobalSettings {
+  title: string,
+  description: string,
   header: HeaderData;
   footer: FooterData;
+}
+
+export interface GlobalSettingsResponse {
+  data: GlobalSettings
 }

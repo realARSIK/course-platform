@@ -1,16 +1,18 @@
 import { FC, memo } from "react";
 import Link from "next/link";
-import LegalLinks from "./LegalLinks";
 import "./Footer.css";
+import { Logo } from "@/components/Logo";
 import { FooterData } from "@/types/global";
-import Logo from "@/components/Logo/Logo";
+import LegalLinks from "./LegalLinks";
 import SocialLinks from "./SocialLinks";
 
 interface FooterProps {
   data: FooterData
 }
 
-const Footer: FC<FooterProps> = ({ data }) => {
+const Footer: FC<FooterProps> = memo(({ data }) => {
+  if (!data) return null;
+
   return (
     <footer className="footer">
       <div className="container">
@@ -20,24 +22,22 @@ const Footer: FC<FooterProps> = ({ data }) => {
             <p className="tagline">Practical programming courses for all levels</p>
           </div>
           <div className="footer__list">
-            {
-              data.main.map((item) => (
-                <div className="footer__group" key={item.title}>
-                  <h4 className="footer__title">{item.title}</h4>
-                  <ul className="footer__links">
-                    {item.links.map((link) => (
-                      <li className="footer__item" key={link.name}>
-                        <Link href={link.path} className="footer__link link" key={link.path}>{link.name}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))
-            }
+            {data.linkGroups.map((item) => (
+              <div className="footer__group" key={item.title}>
+                <h4 className="footer__title">{item.title}</h4>
+                <ul className="footer__links">
+                  {item.links.map((link) => (
+                    <li className="footer__item" key={link.text}>
+                      <Link href={link.url} className="footer__link link" key={link.url}>{link.text}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
         <div className="footer__social">
-          <SocialLinks data={data.social} />
+          <SocialLinks links={data.socialLinks} />
           <div className="footer__form">
             <form className="subscribe form">
               <div className="subscribe__email">
@@ -53,11 +53,11 @@ const Footer: FC<FooterProps> = ({ data }) => {
           <div className="footer__copyright">
             &copy; {new Date().getFullYear()} CoursePlatform. All rights reserved.
           </div>
-          <LegalLinks items={data.legalLinks}/>
+          <LegalLinks links={data.legalLinks}/>
         </div>
       </div>
     </footer>
   )
-}
+})
 
 export default Footer

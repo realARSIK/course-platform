@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import "./globals.css";
 import Header from "@/components/Layout/Header/Header";
 import Footer from "@/components/Layout/Footer/Footer";
-import { mockGlobalSettings } from "@/mocks";
+import { loadGlobalData } from "@/services/globalService";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,14 +13,18 @@ const inter = Inter({
   style: ["normal", "italic"]
 })
 
-export const metadata: Metadata = {
-  title: "Coures Platform",
-  description: "Online Coures Platform",
-};
-
-export function loader() {
-  return mockGlobalSettings 
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, description } = await loadGlobalData();
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+    }
+  }
 }
+
 
 export default async function RootLayout({
   children,
@@ -28,14 +32,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const { header, footer } = loader()
-  const auth = true
+  const { header, footer } = await loadGlobalData();
+  const isAuth = true;
 
   return (
     <html lang="en" className={inter.variable}>
       <body>
         <div className="wrapper">
-          <Header data={header} isAuth={auth}/>
+          <Header data={header} isAuth={isAuth}/>
           <main className="main">
             {children}
           </main>

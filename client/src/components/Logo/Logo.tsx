@@ -6,7 +6,7 @@ interface LogoProps {
   showText?: boolean;
 }
 
-const Logo: FC<LogoProps> = ({ showText }) => {
+export const Logo: FC<LogoProps> = ({ showText }) => {
   return (
     <Link href="/" className="logo">
       <svg className="logo__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68.53 61.59" fill="currentcolor">
@@ -16,5 +16,3 @@ const Logo: FC<LogoProps> = ({ showText }) => {
     </Link>
   )
 }
-
-export default Logo
