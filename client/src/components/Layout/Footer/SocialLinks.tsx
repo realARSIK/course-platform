@@ -3,24 +3,24 @@ import Link from 'next/link'
 import { FC } from 'react'
 
 interface SocialLinksProps {
-  data: SocialLinkItem[]
+  links: SocialLinkItem[]
 }
 
-const SocialLinks: FC<SocialLinksProps> = ({ data }) => {
+const SocialLinks: FC<SocialLinksProps> = ({ links }) => {
   return (
     <div className="footer__social-links">
       {
-        data.map((link) => (
+        links.map((link) => (
           <Link 
-            href={link.path} 
+            href={link.url} 
             className="footer__social-link"
             target="_black"
             rel="noopener noreferrer"
-            aria-label={link.name}
-            key={link.path}
+            aria-label={link.text}
+            key={link.url}
           >
-            <svg className="footer__social-icon" data-name={link.slug}>
-              <use href={`/icons/social-sprite.svg#${link.slug}`}/>
+            <svg className="footer__social-icon" data-name={link.iconName}>
+              <use href={`/icons/social-sprite.svg#${link.iconName}`}/>
             </svg>
           </Link>
         ))

@@ -3,7 +3,6 @@ import type {
   Image,
   ApiResponse,
   SingleApiResponse,
-  RichTextNode,
 } from './common';
 
 import type { LessonBasic } from './lesson';
@@ -11,8 +10,8 @@ import type { LessonBasic } from './lesson';
 export interface CourseBasic extends BaseEntity {
   title: string;
   slug: string;
-  description: RichTextNode[];
-  image?: Image;
+  description: string;
+  image: Image;
 }
 
 export interface Course extends CourseBasic {
@@ -21,6 +20,5 @@ export interface Course extends CourseBasic {
 
 
 export type CoursesResponse = ApiResponse<Course>;
-
 
 export type SingleCourseResponse = SingleApiResponse<Course>;

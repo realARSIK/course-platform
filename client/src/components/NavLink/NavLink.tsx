@@ -8,14 +8,14 @@ import './NavLink.css'
 
 interface NavLinkProps extends LinkItem {}
 
-const NavLink: FC<NavLinkProps> = ({ name, path }) => {
+const NavLink: FC<NavLinkProps> = ({ text, url }) => {
   const pathname = usePathname()
-  const isActive = pathname === path
+  const isActive = pathname === url
   const newClassName = `nav__link ${isActive ? 'nav__link--active' : 'link'}`
 
   return (
-    <Link href={path} className={newClassName}>
-      {name}
+    <Link href={url} className={newClassName}>
+      {text}
     </Link>
   )
 }

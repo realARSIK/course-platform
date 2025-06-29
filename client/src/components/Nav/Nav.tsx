@@ -15,8 +15,8 @@ const Nav: FC<NavProps> = ({ links, isOpen }) => {
       <div className='nav__inner'>
         <ul className="nav__list">
           {links.map((link) => (
-            <li className="nav__item" key={link.path}>
-              <NavLink path={link.path} name={link.name}/>
+            <li className="nav__item" key={link.url}>
+              <NavLink url={link.url} text={link.text}/>
             </li>
           ))}
         </ul>

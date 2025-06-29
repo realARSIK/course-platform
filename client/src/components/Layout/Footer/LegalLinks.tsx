@@ -1,18 +1,18 @@
 import { LinkItem } from '@/types/global'
 import Link from 'next/link'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 interface LegalLinksProps {
-  items: LinkItem[]
+  links: LinkItem[]
 }
 
-const LegalLinks: FC<LegalLinksProps> = ({ items }) => {
+const LegalLinks: FC<LegalLinksProps> = ({ links }) => {
   return (
     <div className="legal">
       <ul className="legal__list">
-        {items.map((item) => (
-          <li className="legal__item" key={item.path}>
-            <Link href={item.path} className="legal__link link">{item.name}</Link>
+        {links.map((link) => (
+          <li className="legal__item" key={link.url}>
+            <Link href={link.url} className="legal__link link">{link.text}</Link>
           </li>
         ))}
       </ul>

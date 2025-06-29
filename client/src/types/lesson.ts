@@ -1,6 +1,5 @@
 import type {
   BaseEntity,
-  RichTextNode,
   ApiResponse,
   SingleApiResponse,
   Video,
@@ -11,8 +10,8 @@ import type { CourseBasic } from './course';
 export interface LessonBasic extends BaseEntity {
   title: string;
   slug: string;
-  content: RichTextNode[];
-  videoUrl?: Video;
+  content: unknown;
+  video: Video;
 }
 
 export interface Lesson extends LessonBasic {
