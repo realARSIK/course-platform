@@ -4,7 +4,7 @@ import { FC, memo, useState } from "react";
 import { HeaderData } from "@/types/global";
 import "./Header.css";
 import Nav from "@/components/Nav/Nav";
-import Logo from "@/components/Logo/Logo";
+import { Logo } from "@/components/Logo";
 import NavBurger from "@/components/NavBurger/NavBurger";
 import NavButtons from "@/components/NavButtons/NavButtons";
 
