@@ -1,5 +1,21 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlocksContentBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_content_blocks';
+  info: {
+    description: '';
+    displayName: 'Content Block';
+  };
+  attributes: {
+    code: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    lessons: Schema.Attribute.Relation<'oneToMany', 'api::lesson.lesson'>;
+    list: Schema.Attribute.JSON;
+    text: Schema.Attribute.Blocks;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElementsGroupLink extends Struct.ComponentSchema {
   collectionName: 'components_elements_group_links';
   info: {
@@ -65,6 +81,7 @@ export interface LayoutHeader extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'blocks.content-block': BlocksContentBlock;
       'elements.group-link': ElementsGroupLink;
       'elements.link': ElementsLink;
       'elements.social-link': ElementsSocialLink;
