@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_blocks_content_blocks",
+  "info": {
+    "displayName": "Content Block",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "list": {
+      "type": "json"
+    },
+    "code": {
+      "type": "text"
+    },
+    "lessons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lesson.lesson"
+    }
+  }
+}

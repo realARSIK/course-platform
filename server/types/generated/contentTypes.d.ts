@@ -385,11 +385,18 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    color: Schema.Attribute.String;
+    content: Schema.Attribute.DynamicZone<['blocks.content-block']>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images' | 'files'>;
+    currency: Schema.Attribute.Enumeration<['RUB']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'RUB'>;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    duration: Schema.Attribute.Integer;
+    isCustom: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isNew: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     lessons: Schema.Attribute.Relation<'oneToMany', 'api::lesson.lesson'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -397,9 +404,28 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       'api::course.course'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    partialPrice: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    picture: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    price: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -451,34 +477,64 @@ export interface ApiLessonLesson extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
     content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::lesson.lesson'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::lesson.lesson'
+    > &
+      Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_progress: Schema.Attribute.Relation<
+    userProgress: Schema.Attribute.Relation<
       'oneToMany',
       'api::user-progress.user-progress'
     >;
-    user_progresses: Schema.Attribute.Relation<
+    userProgresses: Schema.Attribute.Relation<
       'oneToMany',
       'api::user-progress.user-progress'
     >;
     videoUrl: Schema.Attribute.String;
+  };
+}
+
+export interface ApiTagTag extends Struct.CollectionTypeSchema {
+  collectionName: 'tags';
+  info: {
+    description: '';
+    displayName: 'Tag';
+    pluralName: 'tags';
+    singularName: 'tag';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    courses: Schema.Attribute.Relation<'manyToMany', 'api::course.course'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    groupId: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID & Schema.Attribute.Required;
+    tagType: Schema.Attribute.Enumeration<['head', 'common', 'skills']> &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -973,7 +1029,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1008,20 +1063,20 @@ export interface PluginUsersPermissionsUser
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_progress: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::user-progress.user-progress'
-    >;
-    user_progresses: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::user-progress.user-progress'
-    >;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
+    userProgress: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-progress.user-progress'
+    >;
+    userProgresses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-progress.user-progress'
+    >;
   };
 }
 
@@ -1038,6 +1093,7 @@ declare module '@strapi/strapi' {
       'api::course.course': ApiCourseCourse;
       'api::global.global': ApiGlobalGlobal;
       'api::lesson.lesson': ApiLessonLesson;
+      'api::tag.tag': ApiTagTag;
       'api::user-progress.user-progress': ApiUserProgressUserProgress;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

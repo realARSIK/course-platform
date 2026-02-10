@@ -9,7 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -65,13 +65,13 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "user_progress": {
+    "userProgress": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::user-progress.user-progress",
       "mappedBy": "user"
     },
-    "user_progresses": {
+    "userProgresses": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::user-progress.user-progress",

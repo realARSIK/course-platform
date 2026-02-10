@@ -10,11 +10,7 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string",
@@ -38,13 +34,13 @@
       "target": "api::course.course",
       "inversedBy": "lessons"
     },
-    "user_progress": {
+    "userProgress": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::user-progress.user-progress",
       "mappedBy": "lesson"
     },
-    "user_progresses": {
+    "userProgresses": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::user-progress.user-progress",
